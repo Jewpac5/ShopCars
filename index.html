@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop Cars Board</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="header">
+        <h1>Shop Cars Board</h1>
+        <p>Track where each shop vehicle is, who drove it, and remaining fuel/charge.</p>
+      </header>
+
+      <section class="panel">
+        <h2>Add or update a car</h2>
+        <form id="car-form" class="form-grid">
+          <label>
+            Vehicle ID / Name
+            <input id="vehicle" name="vehicle" type="text" placeholder="e.g. EV-12" required />
+          </label>
+
+          <label>
+            Type
+            <select id="type" name="type" required>
+              <option value="EV">EV</option>
+              <option value="Gas">Gas</option>
+            </select>
+          </label>
+
+          <label>
+            Current location
+            <input id="location" name="location" type="text" placeholder="e.g. Bay 2" required />
+          </label>
+
+          <label>
+            Driver
+            <input id="driver" name="driver" type="text" placeholder="Who moved it?" required />
+          </label>
+
+          <label>
+            Charge / Fuel (%)
+            <input id="energy" name="energy" type="number" min="0" max="100" step="1" placeholder="0-100" required />
+          </label>
+
+          <label>
+            Notes (optional)
+            <input id="notes" name="notes" type="text" placeholder="Any extra details" />
+          </label>
+
+          <div class="actions">
+            <button type="submit">Save vehicle</button>
+            <button id="cancel-edit" type="button" class="secondary hidden">Cancel edit</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="list-header">
+          <h2>Current board</h2>
+          <button id="clear-board" class="danger" type="button">Clear all</button>
+        </div>
+        <p id="empty-state" class="empty">No vehicles yet. Add your first update above.</p>
+        <div id="car-list" class="car-list" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <template id="car-card-template">
+      <article class="car-card">
+        <div class="card-top">
+          <h3 class="vehicle-name"></h3>
+          <span class="vehicle-type"></span>
+        </div>
+        <p><strong>Location:</strong> <span class="vehicle-location"></span></p>
+        <p><strong>Driver:</strong> <span class="vehicle-driver"></span></p>
+        <p><strong>Charge/Fuel:</strong> <span class="vehicle-energy"></span>%</p>
+        <p><strong>Notes:</strong> <span class="vehicle-notes"></span></p>
+        <p class="updated-at"></p>
+        <div class="card-actions">
+          <button type="button" class="secondary edit-btn">Edit</button>
+          <button type="button" class="danger delete-btn">Delete</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="script.js" defer></script>
+  </body>
+</html>
